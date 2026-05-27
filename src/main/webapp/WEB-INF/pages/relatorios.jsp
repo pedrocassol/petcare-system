@@ -1,4 +1,5 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
 
@@ -118,7 +119,7 @@
                     <tbody>
                     <c:forEach var="c" items="${consultas}">
                         <tr>
-                            <td>${c.dataHora}</td>
+                            <td>${fn:replace(c.dataHora, 'T', ' ')}</td>
                             <td>${c.nomePet}</td>
                             <td>${c.nomeProprietario}</td>
                             <td>${c.veterinario}</td>
