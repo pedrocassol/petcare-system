@@ -17,7 +17,7 @@
           href="${pageContext.request.contextPath}/css/sidebar.css?v=3">
 
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/css/relatorios.css?v=1">
+          href="${pageContext.request.contextPath}/css/relatorios.css?v=2">
 
 </head>
 
@@ -41,6 +41,35 @@
             </div>
         </div>
 
+        <div class="filter-card">
+
+            <form action="${pageContext.request.contextPath}/relatorios"
+                  method="get"
+                  class="period-filter">
+
+                <label class="period-label">Período:</label>
+
+                <input type="date"
+                       name="dataInicio"
+                       class="form-control period-input"
+                       value="${dataInicio}">
+
+                <span class="period-separator">até</span>
+
+                <input type="date"
+                       name="dataFim"
+                       class="form-control period-input"
+                       value="${dataFim}">
+
+                <button type="submit"
+                        class="btn btn-primary period-button">
+                    Aplicar Filtros
+                </button>
+
+            </form>
+
+        </div>
+
         <div class="reports-grid">
 
             <div class="report-card">
@@ -54,54 +83,14 @@
             </div>
 
             <div class="report-card">
-                <span>Consultas</span>
+                <span>Consultas no Período</span>
                 <strong>${totalConsultas}</strong>
             </div>
 
             <div class="report-card">
-                <span>Valor Estimado</span>
+                <span>Faturamento do Período</span>
                 <strong>R$ ${valorTotal}</strong>
             </div>
-
-        </div>
-
-        <div class="filter-card">
-
-            <form action="${pageContext.request.contextPath}/relatorios"
-                  method="get"
-                  class="row g-3 align-items-end">
-
-                <div class="col-md-4">
-                    <label class="form-label">Status</label>
-                    <select name="status"
-                            class="form-select">
-                        <option value="" ${empty statusSelecionado ? 'selected' : ''}>
-                            Todas
-                        </option>
-                        <option value="Agendada" ${statusSelecionado == 'Agendada' ? 'selected' : ''}>
-                            Agendadas
-                        </option>
-                        <option value="Realizada" ${statusSelecionado == 'Realizada' ? 'selected' : ''}>
-                            Realizadas
-                        </option>
-                    </select>
-                </div>
-
-                <div class="col-md-3">
-                    <button type="submit"
-                            class="btn btn-primary w-100">
-                        Filtrar
-                    </button>
-                </div>
-
-                <div class="col-md-3">
-                    <a href="${pageContext.request.contextPath}/relatorios"
-                       class="btn btn-outline-secondary w-100">
-                        Limpar
-                    </a>
-                </div>
-
-            </form>
 
         </div>
 

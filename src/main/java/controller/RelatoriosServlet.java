@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @WebServlet("/relatorios")
 public class RelatoriosServlet extends HttpServlet {
@@ -29,44 +31,68 @@ public class RelatoriosServlet extends HttpServlet {
                          HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String status = req.getParameter("status");
-        List<Consulta> consultas = filtrarPorStatus(
+        String dataInicio = req.getParameter("dataInicio");
+        String dataFim = req.getParameter("dataFim");
+
+        List<Consulta> consultas = filtrarPorPeriodo(
                 consultaService.listar(),
-                status
+                dataInicio,
+                dataFim
         );
 
         req.setAttribute("totalPets", petService.contar());
         req.setAttribute("totalProprietarios",
                 proprietarioService.contar());
         req.setAttribute("totalConsultas",
-                consultaService.contar());
+                consultas.size());
         req.setAttribute("valorTotal",
                 calcularValorTotal(consultas));
         req.setAttribute("consultas",
                 consultas);
-        req.setAttribute("statusSelecionado",
-                status == null ? "" : status);
+        req.setAttribute("dataInicio",
+                dataInicio == null ? "" : dataInicio);
+        req.setAttribute("dataFim",
+                dataFim == null ? "" : dataFim);
 
         req.getRequestDispatcher("/WEB-INF/pages/relatorios.jsp")
                 .forward(req, resp);
     }
 
-    private List<Consulta> filtrarPorStatus(List<Consulta> consultas,
-                                            String status) {
+    private List<Consulta> filtrarPorPeriodo(List<Consulta> consultas,
+                                             String dataInicio,
+                                             String dataFim) {
 
-        if (status == null || status.trim().isEmpty()) {
+        if (estaVazio(dataInicio) && estaVazio(dataFim)) {
             return consultas;
         }
 
+        LocalDate inicio = estaVazio(dataInicio) ? null :
+                LocalDate.parse(dataInicio);
+        LocalDate fim = estaVazio(dataFim) ? null :
+                LocalDate.parse(dataFim);
         List<Consulta> filtradas = new ArrayList<>();
 
         for (Consulta c : consultas) {
-            if (status.equals(c.getStatus())) {
+
+            LocalDate dataConsulta =
+                    LocalDateTime.parse(c.getDataHora()).toLocalDate();
+
+            boolean depoisDoInicio =
+                    inicio == null || !dataConsulta.isBefore(inicio);
+            boolean antesDoFim =
+                    fim == null || !dataConsulta.isAfter(fim);
+
+            if (depoisDoInicio && antesDoFim) {
                 filtradas.add(c);
             }
         }
 
         return filtradas;
+    }
+
+    private boolean estaVazio(String valor) {
+
+        return valor == null || valor.trim().isEmpty();
     }
 
     private BigDecimal calcularValorTotal(List<Consulta> consultas) {

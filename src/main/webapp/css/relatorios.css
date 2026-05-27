@@ -86,8 +86,39 @@ body {
 }
 
 .filter-card {
-    padding: 22px;
-    margin-bottom: 32px;
+    padding: 26px 34px;
+    margin-bottom: 28px;
+}
+
+.period-filter {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.period-label {
+    color: #1F2A33;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.period-separator {
+    color: #4F6073;
+    white-space: nowrap;
+}
+
+.period-input {
+    width: 160px;
+    border-color: #C9D4DE;
+    border-radius: 7px;
+    padding: 10px 12px;
+}
+
+.period-button {
+    min-width: 180px;
+    margin-left: auto;
+    padding: 11px 18px;
 }
 
 .form-label {
@@ -161,5 +192,16 @@ body {
 @media (max-width: 700px) {
     .reports-grid {
         grid-template-columns: 1fr;
+    }
+
+    .period-filter {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .period-input,
+    .period-button {
+        width: 100%;
+        margin-left: 0;
     }
 }
