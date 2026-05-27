@@ -15,13 +15,10 @@ public class ListarConsultasServlet extends HttpServlet {
     private ConsultaService service = new ConsultaService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("consultas", service.listar());
 
-        req.getRequestDispatcher("/WEB-INF/pages/listarConsultas.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/listarConsultas.jsp").forward(req, resp);
     }
 }

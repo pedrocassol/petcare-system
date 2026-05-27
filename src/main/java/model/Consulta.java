@@ -18,11 +18,7 @@ public class Consulta {
     public Consulta() {
     }
 
-    public Consulta(int idPet,
-                    String dataHora,
-                    String veterinario,
-                    String descricao,
-                    BigDecimal valorEstimado,
+    public Consulta(int idPet, String dataHora, String veterinario, String descricao, BigDecimal valorEstimado,
                     String status,
                     String observacoes) {
 

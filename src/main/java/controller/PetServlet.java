@@ -16,25 +16,18 @@ import java.io.IOException;
 public class PetServlet extends HttpServlet {
 
     private PetService service = new PetService();
-    private ProprietarioService proprietarioService =
-            new ProprietarioService();
+    private ProprietarioService proprietarioService = new ProprietarioService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.setAttribute("proprietarios",
-                proprietarioService.listar());
+        req.setAttribute("proprietarios", proprietarioService.listar());
 
-        req.getRequestDispatcher("/WEB-INF/pages/pets.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/pets.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req,
-                          HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String nome = req.getParameter("nome");
 
@@ -73,15 +66,11 @@ public class PetServlet extends HttpServlet {
 
         } else {
 
-            req.setAttribute("erro",
-                    "Erro ao cadastrar pet");
+            req.setAttribute("erro", "Erro ao cadastrar pet");
 
-            req.setAttribute("proprietarios",
-                    proprietarioService.listar());
+            req.setAttribute("proprietarios", proprietarioService.listar());
 
-            req.getRequestDispatcher(
-                    "/WEB-INF/pages/pets.jsp"
-            ).forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/pages/pets.jsp").forward(req, resp);
         }
     }
 }

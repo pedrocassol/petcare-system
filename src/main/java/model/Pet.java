@@ -16,10 +16,7 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(String nome, String especie,
-               String raca, int idade,
-               String sexo, String observacoes,
-               int idProprietario) {
+    public Pet(String nome, String especie, String raca, int idade, String sexo, String observacoes, int idProprietario) {
 
         this.nome = nome;
         this.especie = especie;
@@ -38,7 +35,6 @@ public class Pet {
         this.id = id;
     }
 
-
     public String getNome() {
         return nome;
     }
@@ -46,7 +42,6 @@ public class Pet {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
 
     public String getEspecie() {
         return especie;
@@ -56,7 +51,6 @@ public class Pet {
         this.especie = especie;
     }
 
-
     public String getRaca() {
         return raca;
     }
@@ -64,7 +58,6 @@ public class Pet {
     public void setRaca(String raca) {
         this.raca = raca;
     }
-
 
     public int getIdade() {
         return idade;
@@ -83,7 +76,6 @@ public class Pet {
         this.sexo = sexo;
     }
 
-
     public String getObservacoes() {
         return observacoes;
     }
@@ -91,7 +83,6 @@ public class Pet {
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
-
 
     public int getIdProprietario() {
         return idProprietario;

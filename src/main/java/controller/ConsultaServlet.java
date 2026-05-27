@@ -19,20 +19,15 @@ public class ConsultaServlet extends HttpServlet {
     private PetService petService = new PetService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setAttribute("pets", petService.listar());
 
-        req.getRequestDispatcher("/WEB-INF/pages/consultas.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/consultas.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req,
-                          HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Consulta c = new Consulta(
                 Integer.parseInt(req.getParameter("idPet")),
@@ -52,12 +47,10 @@ public class ConsultaServlet extends HttpServlet {
 
         } else {
 
-            req.setAttribute("erro",
-                    "Erro ao cadastrar consulta");
+            req.setAttribute("erro", "Erro ao cadastrar consulta");
             req.setAttribute("pets", petService.listar());
 
-            req.getRequestDispatcher("/WEB-INF/pages/consultas.jsp")
-                    .forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/pages/consultas.jsp").forward(req, resp);
         }
     }
 }

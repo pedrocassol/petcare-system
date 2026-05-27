@@ -17,23 +17,17 @@ public class EditarProprietarioServlet extends HttpServlet {
             new ProprietarioService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = Integer.parseInt(req.getParameter("id"));
 
-        req.setAttribute("proprietario",
-                service.buscarPorId(id));
+        req.setAttribute("proprietario", service.buscarPorId(id));
 
-        req.getRequestDispatcher("/WEB-INF/pages/editarProprietario.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/editarProprietario.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req,
-                          HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Proprietario p = new Proprietario(
                 req.getParameter("nome"),

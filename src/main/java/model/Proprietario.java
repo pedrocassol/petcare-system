@@ -11,10 +11,7 @@ public class Proprietario {
     public Proprietario() {
     }
 
-    public Proprietario(String nome,
-                        String telefone,
-                        String email,
-                        String endereco) {
+    public Proprietario(String nome, String telefone, String email, String endereco) {
 
         this.nome = nome;
         this.telefone = telefone;
@@ -29,7 +26,6 @@ public class Proprietario {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getNome() {
         return nome;
@@ -48,7 +44,6 @@ public class Proprietario {
         this.telefone = telefone;
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -56,7 +51,6 @@ public class Proprietario {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public String getEndereco() {
         return endereco;

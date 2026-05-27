@@ -19,24 +19,18 @@ public class EditarPetServlet extends HttpServlet {
             new ProprietarioService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = Integer.parseInt(req.getParameter("id"));
 
         req.setAttribute("pet", service.buscarPorId(id));
-        req.setAttribute("proprietarios",
-                proprietarioService.listar());
+        req.setAttribute("proprietarios", proprietarioService.listar());
 
-        req.getRequestDispatcher("/WEB-INF/pages/editarPet.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/editarPet.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req,
-                          HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Pet p = new Pet(
                 req.getParameter("nome"),

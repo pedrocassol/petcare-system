@@ -15,13 +15,11 @@ public class ListarPetsServlet extends HttpServlet {
     private PetService service = new PetService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         req.setAttribute("pets", service.listar());
 
-        req.getRequestDispatcher("/WEB-INF/pages/listarPets.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/listarPets.jsp").forward(req, resp);
     }
 }

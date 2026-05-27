@@ -15,9 +15,7 @@ public class ExcluirConsultaServlet extends HttpServlet {
     private ConsultaService service = new ConsultaService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = Integer.parseInt(req.getParameter("id"));
 

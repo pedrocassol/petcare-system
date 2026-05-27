@@ -21,15 +21,11 @@ import java.time.LocalDateTime;
 public class RelatoriosServlet extends HttpServlet {
 
     private PetService petService = new PetService();
-    private ProprietarioService proprietarioService =
-            new ProprietarioService();
-    private ConsultaService consultaService =
-            new ConsultaService();
+    private ProprietarioService proprietarioService = new ProprietarioService();
+    private ConsultaService consultaService = new ConsultaService();
 
     @Override
-    protected void doGet(HttpServletRequest req,
-                         HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String dataInicio = req.getParameter("dataInicio");
         String dataFim = req.getParameter("dataFim");
@@ -41,41 +37,29 @@ public class RelatoriosServlet extends HttpServlet {
         );
 
         req.setAttribute("totalPets", petService.contar());
-        req.setAttribute("totalProprietarios",
-                proprietarioService.contar());
-        req.setAttribute("totalConsultas",
-                consultas.size());
-        req.setAttribute("valorTotal",
-                calcularValorTotal(consultas));
-        req.setAttribute("consultas",
-                consultas);
-        req.setAttribute("dataInicio",
-                dataInicio == null ? "" : dataInicio);
-        req.setAttribute("dataFim",
-                dataFim == null ? "" : dataFim);
+        req.setAttribute("totalProprietarios", proprietarioService.contar());
+        req.setAttribute("totalConsultas", consultas.size());
+        req.setAttribute("valorTotal", calcularValorTotal(consultas));
+        req.setAttribute("consultas", consultas);
+        req.setAttribute("dataInicio", dataInicio == null ? "" : dataInicio);
+        req.setAttribute("dataFim", dataFim == null ? "" : dataFim);
 
-        req.getRequestDispatcher("/WEB-INF/pages/relatorios.jsp")
-                .forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/relatorios.jsp").forward(req, resp);
     }
 
-    private List<Consulta> filtrarPorPeriodo(List<Consulta> consultas,
-                                             String dataInicio,
-                                             String dataFim) {
+    private List<Consulta> filtrarPorPeriodo(List<Consulta> consultas, String dataInicio, String dataFim) {
 
         if (estaVazio(dataInicio) && estaVazio(dataFim)) {
             return consultas;
         }
 
-        LocalDate inicio = estaVazio(dataInicio) ? null :
-                LocalDate.parse(dataInicio);
-        LocalDate fim = estaVazio(dataFim) ? null :
-                LocalDate.parse(dataFim);
+        LocalDate inicio = estaVazio(dataInicio) ? null : LocalDate.parse(dataInicio);
+        LocalDate fim = estaVazio(dataFim) ? null : LocalDate.parse(dataFim);
         List<Consulta> filtradas = new ArrayList<>();
 
         for (Consulta c : consultas) {
 
-            LocalDate dataConsulta =
-                    LocalDateTime.parse(c.getDataHora()).toLocalDate();
+            LocalDate dataConsulta = LocalDateTime.parse(c.getDataHora()).toLocalDate();
 
             boolean depoisDoInicio =
                     inicio == null || !dataConsulta.isBefore(inicio);
